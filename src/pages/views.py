@@ -13,3 +13,9 @@ def studentHome_view(request, *args, **kwargs):
 
 def adminHome_view(request, *args, **kwargs):
     return render(request, "adminHome.html", {})
+
+def instructorAddCourse(request, *args, **kwargs):
+    return render(request, "addCourse.html", {})
+
+def studentApplyToCourse(request, *args, **kwargs):
+    return render(request, "applyToCourse.html", {})

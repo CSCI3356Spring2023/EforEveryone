@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 #Custom urls
-from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view
+from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, instructorAddCourse, studentApplyToCourse
 
 urlpatterns = [
     path('', logIn_view, name="LogIn"),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('adminHome/', adminHome_view),
     path('instructorHome/', instructorHome_view),
     path('studentHome/', studentHome_view),
+    path('instructorHome/add-course', instructorAddCourse),
+    path('studentHome/apply', studentApplyToCourse),
 ]

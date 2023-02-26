@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Add Course</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="{% static 'instructorHome.js' %}" defer></script>
+  </head>
+  
+  <body>
+      
+    <div class = "header-box">
+      <div class = "row" id = "top-bar">
+        <div class = "header"> Add Course </div> 
+        <button class = "button" id = "profile-button" value = "-1">My Profile</button>
+        <a class="button" id = "home-button" href="/instructorHome">Back To Home</a>
+      </div>
+    </div>
+    
+    
+    <label for = "name">Course Name</label>
+    <div class = "row" id = "name">
+          <input type="text" placeholder="">
+    </div>
+    
+    <label for = "desc">Course Description</label>
+    <div class = "row" id = "desc">
+        <textarea class = "long" rows="4" cols="50">
+        </textarea>
+    </div>
+    
+    <div class = "row" id = "num-ta"> Number of TAs: 
+      <input type = "number" min = "1" max = "10">
+    </div>
+    
+    <div class = "row" id = "discussion"> Discussion Section: &nbsp &nbsp
+      <input type="radio" id="yes" name="disc" value="yes"> Yes &nbsp &nbsp
+      <input type="radio" id="no" name="disc" value="no" > No
+    </div>
+    
+    <label for = "expectations">TA Expectations</label>
+    <div class = "row" id = "expectations">
+        <textarea class = "long" rows="4" cols="50">
+        </textarea>
+    </div>
+    
+    
+    <div class = "finish" id = "finish"> 
+          <button class = "button" id = "draft-button" value = "-1">Save Draft</button>
+          <button class = "button" id = "publish-button" value = "-1">Publish Course</button>
+    </div>
+    
+  </body>
+</html>
