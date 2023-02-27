@@ -34,8 +34,9 @@
       <div class = "row" id = "top-bar">
         <div class = "header"> Computer Science TA Application </div> 
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
-        <a class="button" id = "add-button" href="add-course.html">Add Course</a>
+        <a class="button" id = "add-button" href="/instructorHome/add-course">Add Course</a>
         <a class="button" id = "stu-button" >View Students</a>
+        <a class="button" id = "instructor-button" >View Instructors</a>
       </div>
       
       <div class = "row" id = "second-bar"> Keywords
@@ -63,7 +64,6 @@
           
           <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'all-courses')" id = "defaultOpen">All Courses</button>
-            <button class="tablinks" onclick="openCity(event, 'favorites')">My Courses</button>
             <button class="tablinks" onclick="openCity(event, 'applied-to')">Review Applications</button>
           </div>
 
@@ -74,9 +74,10 @@
                 <h3><strong>CSCI 1102 Computer Science II</strong></h3>
                 <button class = "status-button" id = "closed-button">Closed</button>
                 <input class="star" type="checkbox" title="bookmark page">
+                <a class="button" id = "apply-button" href="/instructorHome/add-course">Edit</a>
               </div>
               <h4>Levear, Duncan A</h4>
-              <h4>T Th 3:00AM - 4:15AM</h4>
+              <h4>T Th 3:00PM - 4:15PM</h4>
               <p>
                 In this course, the student will write programs that employ more sophisticated and efficient means of representing and 
                 manipulating information. Part of the course is devoted to a continued study of programming. The principal emphasis, 
@@ -86,7 +87,8 @@
 
               <div class = "row" id = "info">
                 Discussion Section: Yes &nbsp &nbsp &nbsp Number of TAs: 1 &nbsp &nbsp &nbsp Grading Meetings: No &nbsp &nbsp &nbsp Number of Office Hours per Week: 3
-                <a class="button" id = "apply-button" href="add-course.html">Edit</a>
+                <a class="button" id = "view-apps-button">View Applications</a>
+  
                 
               </div>
             </div>
@@ -95,6 +97,7 @@
                 <h3><strong>CSCI 3356 Software Engineering</strong></h3>
                 <button class = "status-button" id = "status-button2">Open</button>
                 <input class="star" type="checkbox" title="bookmark page">
+                <a class="button" id = "apply-button2" href="/instructorHome/add-course">Edit</a>
               </div>
               <h4>Marques Samary, Maira R</h4>
               <h4>M W F 10:00AM - 10:50AM</h4>
@@ -106,15 +109,15 @@
                 The project will be worth 50% of the grade, as well as 2 midterms, an exam, and a peer assessment (how your team members 
                 evaluate the work you did).</p>
 
-              <div class = "row" id = "info">
+              <div class = "row" id = "info2">
                 Discussion Section: Yes &nbsp &nbsp &nbsp Number of TAs: 2 &nbsp &nbsp &nbsp Grading Meetings: Yes &nbsp &nbsp &nbsp Number of Office Hours per Week: 2
-                <a class="button" id = "apply-button" href="add-course.html">Edit</a>
+                <a class="button" id = "view-apps-button2">View Applications</a>
               </div>
             </div>
           </div>
 
           <div id="favorites" class="tabcontent">
-            <div class = "course" id = "c1">
+            <div class = "course" id = "c3">
               <div class = "row">
                 <h3><strong>CSCI 3356 Software Engineering</strong></h3>
                 <button class = "status-button" id = "status-button">Open</button>
@@ -132,9 +135,9 @@
                 The project will be worth 50% of the grade, as well as 2 midterms, an exam, and a peer assessment (how your team members 
                 evaluate the work you did).</p>
 
-              <div class = "row" id = "info">
+              <div class = "row" id = "info3">
                 Discussion Section: Yes &nbsp &nbsp &nbsp Number of TAs: 2 &nbsp &nbsp &nbsp Grading Meetings: Yes &nbsp &nbsp &nbsp Number of Office Hours per Week: 2
-                <a class="button" id = "apply-button" href="add-course.html">Edit</a>
+                <a class="button" id = "view-apps-button3">View Applications</a>
 
               </div>
             </div>
