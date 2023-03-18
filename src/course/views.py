@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .forms import CourseCreationFormTest, CourseCreationForm
+from .forms import CourseCreationForm, CourseCreationFormRaw
 from .models import Course
 # Create your views here.
 

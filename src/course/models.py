@@ -7,10 +7,11 @@ class Course(models.Model):
     courseSection = models.IntegerField(default=0)
     courseDescription = models.TextField(blank=True, null=True, default='Description')
     instructor = models.CharField(default='Instructor', max_length=100)
-    #dayOfTheWeek = customFields.DayOfTheWeekField()
+    days = models.CharField(default='', max_length=100)
     startTime = models.TimeField(default='00:00:00')
     endTime = models.TimeField(default='00:00:00')
     hasDiscussion = models.BooleanField(default=False, null=False)
     homeworkGradedInMeetings = models.BooleanField(default=False, null=False)
     officeHoursPerWeek = models.IntegerField(default=0)
     relevantInfo = models.TextField(blank=True, null=True)
+

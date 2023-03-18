@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     #Custom
     'course',
     'pages',
-    'customFields',
-    
+
 ]
 
 MIDDLEWARE = [
