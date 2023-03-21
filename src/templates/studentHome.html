@@ -1,4 +1,5 @@
 {% load static %}
+{% if user.is_authenticated %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -176,3 +177,6 @@
     
   </body>
 </html>
+{% else %}
+<li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+{% endif %}
