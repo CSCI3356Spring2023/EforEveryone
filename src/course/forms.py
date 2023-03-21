@@ -56,6 +56,7 @@ class CourseCreationFormRaw(forms.Form):
     relevantInfo = forms.CharField(label='Relevant info for applicants', required=False, widget=forms.Textarea)
 
 class DiscussionForm(forms.ModelForm):
+    discussionNumber = forms.IntegerField(label='Discussion Number')
     startTime = forms.TimeField(label='Start Time', widget=forms.TimeInput(attrs={'type': 'time'}))
     endTime = forms.TimeField(label='End Time', widget=forms.TimeInput(attrs={'type': 'time'}))
     days = forms.MultipleChoiceField(choices=DAYS_OF_WEEK)
