@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 
 #Custom urls
-from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, instructorAddCourse, studentApplyToCourse
+from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, studentApplyToCourse
 from course.views import Course_Creation_View
 
 urlpatterns = [
-    path('', studentHome_view, name='login'),
+    path('', logIn_view),
     path('admin/', admin.site.urls),
     path('adminHome/', adminHome_view),
     path('instructorHome/', instructorHome_view),
@@ -29,8 +29,10 @@ urlpatterns = [
     path('add-course-form', Course_Creation_View),
     path('instructorHome/add-course', instructorAddCourse),
     path('studentHome/apply', studentApplyToCourse),
+    path('logIn/', logIn_view),
+    path('logOut/', logOut_view),
 ]
 
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-]
+# urlpatterns += [
+#     path('accounts/', include('django.contrib.auth.urls')),
+# ]

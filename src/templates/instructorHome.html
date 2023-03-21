@@ -29,10 +29,20 @@
     <!-- Import the webpage's javascript file -->
     <script src="{% static 'instructorHome.js' %}" defer></script>
   </head>
+
+  <style>
+    #logOut-button{
+    background-color: #8a100b;
+    border-color: white;
+    }
+  </style>
+
   <body>
     <div class = "header-box">
       <div class = "row" id = "top-bar">
-        <div class = "header"> Computer Science TA Application </div> 
+        <div class = "header"> TA application - Instructors </div> 
+        <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
+        <a class = "button" id = "logOut-button" href='/logOut'>Log Out</a>
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
         <a class="button" id = "add-button" href="/add-course-form">Add Course</a>
       </div>

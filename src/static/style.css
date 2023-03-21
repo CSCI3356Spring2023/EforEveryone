@@ -68,6 +68,17 @@ h4 {
   margin: 5px;
 }
 
+.hello-msg{
+  font-size: 18px;
+  color: white;
+  margin-right: 20px;
+}
+
+.logOut-button{
+  background-color: #8a100b;
+  border-color: white;
+}
+
 #home-button {
   background-color: #8a100b;
   border-color: white;

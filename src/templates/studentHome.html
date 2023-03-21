@@ -1,5 +1,4 @@
 {% load static %}
-{% if user.is_authenticated %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,10 +29,20 @@
     <!-- Import the webpage's javascript file -->
     <script src="{% static 'studentHome.js' %}" defer></script>
   </head>
+
+  <style>
+    #logOut-button{
+    background-color: #8a100b;
+    border-color: white;
+    }
+  </style>
+
   <body>
     <div class = "header-box">
       <div class = "row" id = "top-bar">
-        <div class = "header"> Computer Science TA Application </div> 
+        <div class = "header"> TA application - Students </div> 
+        <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
+        <a class = "button" id = "logOut-button" href='/logOut'>Log Out</a>
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
         <!--<a class="button" id = "add-button" href="add-course.html">Add Course</a>-->
       </div>
@@ -177,6 +186,3 @@
     
   </body>
 </html>
-{% else %}
-<li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-{% endif %}
