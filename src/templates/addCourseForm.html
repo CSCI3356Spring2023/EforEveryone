@@ -30,6 +30,12 @@
     <script src="{% static 'instructorHome.js' %}" defer></script>
   </head>
   
+  <style>
+    .hidden {
+      display: none
+    }
+  </style>
+
   <body>
       
     <div class = "header-box">
@@ -42,10 +48,50 @@
     
     {% block content %}
     <form method="post">{%csrf_token %}
-        {{form.as_p}}
+        {{courseForm.as_p}}
+        {% if discussionForm %}
+        <h3>Discussion groups</h3>
+        {{discussionForm.management_form}}
+        <div id="discussion-form-list">
+        {% for form in discussionForm %}
+          <div class="discussion-form">
+            {{form.as_p}}
+          </div>
+        {% endfor %}
+        </div>
+        <div id = "empty-discussion-form" class="hidden">{{discussionForm.empty_form.as_p}}</div>
+        <button id="add-more-discussion" type="button">Add Discussion</button>
+        {% endif %}
         <input type="submit" value="Publish">
-    </form>
+      </form>
     {% endblock %}
     
   </body>
+
+  <script>
+    const addDisccusionButton = document.getElementById("add-more-discussion");
+    const totalNewForms = document.getElementById("id_form-TOTAL_FORMS");
+    
+    addDisccusionButton.addEventListener('click', add_new_discussion);
+
+    function add_new_discussion(args)
+    {
+      if (event)
+      {
+        event.preventDefault();
+      }
+      const currentDiscussionForms = document.getElementsByClassName("discussion-form");
+      let currentdiscussionFormCount = currentDiscussionForms.length
+      const discussionCopyTarget = document.getElementById("discussion-form-list")
+      const copyEmptyDiscussionForm = document.getElementById("empty-discussion-form").cloneNode(true);
+      copyEmptyDiscussionForm.setAttribute('class', "discussion-form");
+      copyEmptyDiscussionForm.setAttribute('id', `discussionForm-${currentdiscussionFormCount}`);
+      const regex = new RegExp("__prefix__", 'g');
+      copyEmptyDiscussionForm.innerHTML = copyEmptyDiscussionForm.innerHTML.replace(regex, currentdiscussionFormCount);
+      totalNewForms.setAttribute("value", currentdiscussionFormCount+1);
+      discussionCopyTarget.append(copyEmptyDiscussionForm);
+    }
+
+  </script>
+
 </html>

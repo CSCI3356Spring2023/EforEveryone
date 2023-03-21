@@ -26,7 +26,7 @@ urlpatterns = [
     path('adminHome/', adminHome_view),
     path('instructorHome/', instructorHome_view),
     path('studentHome/', studentHome_view),
-    path('instructorHome/add-course-form', Course_Creation_View),
+    path('add-course-form', Course_Creation_View),
     path('instructorHome/add-course', instructorAddCourse),
     path('studentHome/apply', studentApplyToCourse),
 ]

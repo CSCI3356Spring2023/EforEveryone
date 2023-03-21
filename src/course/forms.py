@@ -1,5 +1,6 @@
 from django import forms
-from .models import Course
+from .models import Course, Discussion
+from django.forms.models import inlineformset_factory
 
 DAYS_OF_WEEK = (
     (0, 'Monday'),
@@ -39,8 +40,7 @@ class CourseCreationForm(forms.ModelForm):
             'officeHoursPerWeek',
             'relevantInfo'
         ]
-        
-        
+             
 
 
 class CourseCreationFormRaw(forms.Form):
@@ -55,3 +55,15 @@ class CourseCreationFormRaw(forms.Form):
     officeHoursPerWeek = forms.IntegerField(label='Office hours per week')
     relevantInfo = forms.CharField(label='Relevant info for applicants', required=False, widget=forms.Textarea)
 
+class DiscussionForm(forms.ModelForm):
+    startTime = forms.TimeField(label='Start Time', widget=forms.TimeInput(attrs={'type': 'time'}))
+    endTime = forms.TimeField(label='End Time', widget=forms.TimeInput(attrs={'type': 'time'}))
+    days = forms.MultipleChoiceField(choices=DAYS_OF_WEEK)
+    class Meta:
+        model = Discussion
+        fields = (
+            'discussionNumber',
+            'days',
+            'startTime',
+            'endTime'
+        )

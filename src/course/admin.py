@@ -1,5 +1,12 @@
 from django.contrib import admin
 
-from .models import Course
+from .models import Course, Discussion
 # Register your models here.
-admin.site.register(Course)
+class DiscussionInline(admin.StackedInline):
+    model = Discussion
+    extra = 0
+
+class CourseAdmin(admin.ModelAdmin):
+    inlines = [DiscussionInline]
+
+admin.site.register(Course, CourseAdmin)

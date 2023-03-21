@@ -1,21 +1,33 @@
 from django.shortcuts import render
 
-from .forms import CourseCreationForm, CourseCreationFormRaw
-from .models import Course
+from .forms import CourseCreationForm, CourseCreationFormRaw, DiscussionForm
+from .models import Course, Discussion, DiscussionFormSet
+from django.forms.models import modelformset_factory
 # Create your views here.
 
 def Course_Creation_View(request):
-    form = CourseCreationForm()
-    if (request.method == "POST"):
-        form = CourseCreationForm(request.POST)
-        if (form.is_valid()):
-            print(form.cleaned_data)
-            Course.objects.create(**form.cleaned_data)
-        else:
-            print(form.errors)
+    courseForm = CourseCreationForm()
+    discussionFormSet = modelformset_factory(Discussion, form=DiscussionForm, formset=DiscussionFormSet, extra=0)
+    discussionForm = discussionFormSet(request.POST or None)
     context = {
-        "form" : form
+        "courseForm" : courseForm,
+        "discussionForm": discussionForm,
     }
+    if (request.method == "POST"):
+        print(request.POST)
+        courseForm = CourseCreationForm(request.POST)
+        discussionFormSet = modelformset_factory(Discussion, form=DiscussionForm, formset=DiscussionFormSet, extra=0)
+        discussionForm = discussionFormSet(request.POST)
+        if all([courseForm.is_valid(), discussionForm.is_valid()]):
+            course = courseForm.save(commit=False)
+            course.save()
+            for form in discussionForm:
+                discussion = form.save(commit=False)
+                discussion.course = course
+                discussion.save()
+            context['message'] = 'Data saved.'
+        else:
+            print(courseForm.errors)
     return render(request, "addCourseForm.html", context)
 
 # def Course_Creation_View(request):

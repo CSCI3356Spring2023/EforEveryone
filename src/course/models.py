@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms.models import BaseModelFormSet
 
 # Create your models here.
 class Course(models.Model):
@@ -15,3 +16,14 @@ class Course(models.Model):
     officeHoursPerWeek = models.IntegerField(default=0)
     relevantInfo = models.TextField(blank=True, null=True)
 
+class Discussion(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    discussionNumber = models.IntegerField(default=0)
+    days = models.CharField(default='', max_length=100)
+    startTime = models.TimeField(default='00:00:00')
+    endTime = models.TimeField(default='00:00:00')
+
+class DiscussionFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super(DiscussionFormSet, self).__init__(*args, **kwargs)
+        self.queryset = Discussion.objects.none()
