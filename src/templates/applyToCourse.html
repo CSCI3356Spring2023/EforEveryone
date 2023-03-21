@@ -42,57 +42,12 @@
     
     <h2> Application for [Course Name] [Course Number/Section] with Professor [Name] 
     </h2>
-    
-    <label for = "name">Please enter your first and last name</label>
-    <div class = "row" id = "name">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "short" id = "prompt" rows="1" cols="5">
-        </textarea>
-    </div>
-    
-    <label for = "email">Please enter your bc.edu email</label>
-    <div class = "row" id = "email">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "short" rows="1" cols="5">
-        </textarea>
-    </div>
-    
-    <label for = "eagleID">Please enter your 8-digit Eagle ID</label>
-    <div class = "row" id = "eagleID">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "short" rows="1" cols="5">
-        </textarea>
-    </div>
-    
-    <label for = "CourseExperience">Have you taken this course and if so what grade did you receive?</label>
-    <div class = "row" id = "CourseExperience">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "long" rows="1" cols="5">
-        </textarea>
-    </div>
-    
-    <label for = "answer">Why are you interested in being a TA for this course?</label>
-    <div class = "row" id = "answer">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "long" rows="4" cols="50">
-        </textarea>
-    </div>
-    
-    <label for = "exp">Please explain any relevant experience you have with course material</label>
-    <div class = "row" id = "exp">
-          <!--<input type="text" placeholder="">-->
-        <textarea class = "long" rows="4" cols="50">
-        </textarea>
-    </div>
-    
-   
-    
-    
-    
-    <div class = "finish" id = "finish"> 
-          <button class = "button" id = "draft-button" value = "-1">Save Draft</button>
-          <button class = "button" id = "submit-button" value = "-1">Submit Application</button>
-    </div>
-    
+    {% block content %}
+    <form method="post">{%csrf_token %}
+      {{applicationForm.as_p}}
+      <h3>Publish</h3>
+      <input type="submit" value="Apply">
+    </form>
+    {% endblock %}
   </body>
 </html>

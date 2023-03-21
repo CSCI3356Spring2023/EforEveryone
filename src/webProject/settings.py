@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #Custom
     'course',
     'pages',
+    'application',
 
 ]
 
