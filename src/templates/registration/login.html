@@ -26,6 +26,14 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
+    <div class="form-group">
+      <label for="role">I am a:</label>
+      <select class="form-control" id="role" name="role">
+        <option value="student">Student</option>
+        <option value="instructor">Instructor</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
     <input type="submit" value="login">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
