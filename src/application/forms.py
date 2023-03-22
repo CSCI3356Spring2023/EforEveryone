@@ -2,7 +2,6 @@ from django import forms
 from .models import Application
 
 class ApplicationCreationForm(forms.ModelForm):
-    name = forms.CharField(label='Please enter your first and last name')
     email = forms.CharField(label='Please enter your bc.edu email')
     eagleID = forms.IntegerField(label='Please enter your 8-digit Eagle ID')
     courseHistory = forms.CharField(label='Have you taken this course and if so what grade did you receive?')
@@ -12,7 +11,6 @@ class ApplicationCreationForm(forms.ModelForm):
     class Meta:
         model=Application
         fields = [
-            'name',
             'email',
             'eagleID',
             'courseHistory',

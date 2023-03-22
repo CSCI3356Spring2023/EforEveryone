@@ -15,6 +15,7 @@ def Application_Creation_View(request):
         applicationForm = ApplicationCreationForm(request.POST)
         if (applicationForm.is_valid()):
             application = applicationForm.save(commit=False)
+            application.name = request.user.first_name + ' ' + request.user.last_name
             application.save()
             context['message'] = 'Data saved.'
         else:
