@@ -82,8 +82,8 @@
         event.preventDefault();
       }
       const currentDiscussionForms = document.getElementsByClassName("discussion-form");
-      let currentdiscussionFormCount = currentDiscussionForms.length
-      const discussionCopyTarget = document.getElementById("discussion-form-list")
+      let currentdiscussionFormCount = currentDiscussionForms.length;
+      const discussionCopyTarget = document.getElementById("discussion-form-list");
       const copyEmptyDiscussionForm = document.getElementById("empty-discussion-form").cloneNode(true);
       copyEmptyDiscussionForm.setAttribute('class', "discussion-form");
       copyEmptyDiscussionForm.setAttribute('id', `discussionForm-${currentdiscussionFormCount}`);

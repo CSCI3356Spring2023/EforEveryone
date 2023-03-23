@@ -15,6 +15,7 @@ class Course(models.Model):
     homeworkGradedInMeetings = models.BooleanField(default=False, null=False)
     officeHoursPerWeek = models.IntegerField(default=0)
     relevantInfo = models.TextField(blank=True, null=True)
+    numberOfTAs = models.IntegerField(default=0)
 
 class Discussion(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)

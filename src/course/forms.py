@@ -20,6 +20,7 @@ class CourseCreationForm(forms.ModelForm):
     days = forms.MultipleChoiceField(choices=DAYS_OF_WEEK, widget=forms.CheckboxSelectMultiple)
     startTime = forms.TimeField(label='Start Time', widget=forms.TimeInput(attrs={'type': 'time'}))
     endTime = forms.TimeField(label='End Time', widget=forms.TimeInput(attrs={'type': 'time'}))
+    numberOfTAs = forms.IntegerField(label='Number of TAs needed')
     hasDiscussion = forms.NullBooleanField(label='Discussion Sections')
     homeworkGradedInMeetings = forms.NullBooleanField(label='Homework graded in meetings')
     officeHoursPerWeek = forms.IntegerField(label='Office hours per week')
@@ -35,6 +36,7 @@ class CourseCreationForm(forms.ModelForm):
             'days',
             'startTime',
             'endTime',
+            'numberOfTAs',
             'hasDiscussion',
             'homeworkGradedInMeetings',
             'officeHoursPerWeek',
@@ -59,7 +61,7 @@ class DiscussionForm(forms.ModelForm):
     discussionNumber = forms.IntegerField(label='Discussion Number')
     startTime = forms.TimeField(label='Start Time', widget=forms.TimeInput(attrs={'type': 'time'}))
     endTime = forms.TimeField(label='End Time', widget=forms.TimeInput(attrs={'type': 'time'}))
-    days = forms.MultipleChoiceField(choices=DAYS_OF_WEEK)
+    days = forms.CharField(label='Day', widget=forms.Select(choices=DAYS_OF_WEEK))
     class Meta:
         model = Discussion
         fields = (
