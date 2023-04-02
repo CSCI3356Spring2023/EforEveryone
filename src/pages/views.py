@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core.mail import send_mail
 
 from course.models import Course
 
@@ -66,3 +67,20 @@ def instructorAddCourse(request, *args, **kwargs):
 @login_required(login_url='/logIn')
 def studentApplyToCourse(request, *args, **kwargs):
     return render(request, "applyToCourse.html", {})
+
+def send_email(request):
+    subject = 'Test Email'
+    message = 'Hello this is a test'
+    sender_email = 'sender@example.com'
+    recipient_list = [request.user.email]
+    
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=sender_email,
+        recipient_list=recipient_list,
+        fail_silently=False,
+    )
+    
+    return render(request, 'email_sent.html')
+

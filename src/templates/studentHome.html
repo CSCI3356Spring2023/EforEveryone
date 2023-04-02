@@ -38,6 +38,10 @@
   </style>
 
   <body>
+    <form method="post" action="{% url 'send_email' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Send email</button>
+    </form>
     <div class = "header-box">
       <div class = "row" id = "top-bar">
         <div class = "header"> TA application - Students </div> 

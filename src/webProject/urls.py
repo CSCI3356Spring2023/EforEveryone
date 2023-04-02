@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 #Custom urls
-from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse
+from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, send_email
 from course.views import Course_Creation_View
 from application.views import Application_Creation_View
 
@@ -33,7 +33,7 @@ urlpatterns = [
     path('studentHome/apply/<int:courseID>', Application_Creation_View, name="studentApply"),
     path('logIn/', logIn_view),
     path('logOut/', logOut_view),
-    
+    path('send_email/', send_email, name='send_email'),
 ]
 
 # urlpatterns += [
