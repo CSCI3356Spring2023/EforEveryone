@@ -29,9 +29,11 @@ urlpatterns = [
     path('studentHome/', studentHome_view),
     path('add-course-form', Course_Creation_View),
     path('instructorHome/add-course', instructorAddCourse),
-    path('studentHome/apply', Application_Creation_View),
+    #'<int:key_id>/'
+    path('studentHome/apply/<int:courseID>', Application_Creation_View, name="studentApply"),
     path('logIn/', logIn_view),
     path('logOut/', logOut_view),
+    
 ]
 
 # urlpatterns += [

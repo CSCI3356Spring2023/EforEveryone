@@ -39,10 +39,9 @@
         <a class="button" id = "home-button" href="/studentHome">Back To Home</a>
       </div>
     </div>
-    
-    <h2> Application for [Course Name] [Course Number/Section] with Professor [Name] 
-    </h2>
     {% block content %}
+    <h2> Application for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}
+    </h2>
     <form method="post">{%csrf_token %}
       {{applicationForm.as_p}}
       <h3>Publish</h3>

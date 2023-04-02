@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from .forms import ApplicationCreationForm
-
-
+from course.models import Course
 # Create your views here.
 
 
-def Application_Creation_View(request):
+def Application_Creation_View(request, courseID):
     applicationForm = ApplicationCreationForm()
+    course = Course.objects.get(id = courseID)
+
     context = {
         "applicationForm" : applicationForm,
+        "course" : course,
     }
     if (request.method == "POST"):
         print(request.POST)

@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from course.models import Course
+
 # Create your views here.
 def logIn_view(request, *args, **kwargs):
     username = ''
@@ -35,15 +37,27 @@ def logOut_view(request):
 
 @login_required(login_url='/logIn')
 def instructorHome_view(request, *args, **kwargs):
-    return render(request, "instructorHome.html", {})
+    courseDataAll = Course.objects.all()
+    context = {
+        "all_courses" : courseDataAll
+    }
+    return render(request, "instructorHome.html", context)
 
 @login_required(login_url='/logIn')
 def studentHome_view(request, *args, **kwargs):
-    return render(request, "studentHome.html", {})
+    courseDataAll = Course.objects.all()
+    context = {
+        "all_courses" : courseDataAll
+    }
+    return render(request, "studentHome.html", context)
 
 @login_required(login_url='/logIn')
 def adminHome_view(request, *args, **kwargs):
-    return render(request, "adminHome.html", {})
+    courseDataAll = Course.objects.all()
+    context = {
+        "all_courses" : courseDataAll
+    }
+    return render(request, "adminHome.html", context)
 
 @login_required(login_url='/logIn')
 def instructorAddCourse(request, *args, **kwargs):
