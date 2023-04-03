@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="https://glitch.com/favicon.ico" />
 
-    <title>Add Course</title>
+    <title>View Applications</title>
 
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -34,7 +34,7 @@
       
     <div class = "header-box">
       <div class = "row" id = "top-bar">
-        <div class = "header"> TA Application i Instructors </div> 
+        <div class = "header"> Ta Application - Instructors </div> 
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
         <a class="button" id = "home-button" href="/instructorHome">Back To Home</a>
       </div>
@@ -44,9 +44,6 @@
     
     <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
     <br> <br>
-    
-    {% for course in all_courses %}
-      {{course.courseNumber}}/{{course.courseSection}} {{course.courseName}} <br>
 
       {% for application in all_applications %}
 
@@ -58,7 +55,6 @@
 
       {% endfor %}
     <br>
-    {% endfor %}
     {% endblock %}
   </body>
 </html>

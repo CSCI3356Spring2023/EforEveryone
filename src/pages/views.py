@@ -40,10 +40,11 @@ def logOut_view(request):
 @login_required(login_url='/logIn')
 def instructorHome_view(request, *args, **kwargs):
     courseDataAll = Course.objects.all()
-    teacherApplications = Application.objects.all()
+    courseDataUser = Course.objects.filter(instructorUser=request.user)
+    
     context = {
         "all_courses" : courseDataAll,
-        "all_applications" : teacherApplications
+        "user_courses" : courseDataUser,
     }
     return render(request, "instructorHome.html", context)
 

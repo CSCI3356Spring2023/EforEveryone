@@ -27,11 +27,11 @@ def Application_Creation_View(request, courseID):
     return render(request, "applyToCourse.html", context)
 
 
-def Application_View(request, *args, **kwargs):
-    courseDataAll = Course.objects.all()
-    teacherApplications = Application.objects.all()
+def Application_View(request, courseID):
+    course = Course.objects.get(id = courseID)
+    applications = Application.objects.all()
     context = {
-        "all_courses" : courseDataAll,
-        "all_applications" : teacherApplications
+        "course" : course,
+        "all_applications" : applications
     }
     return render(request, "applicationView.html", context)

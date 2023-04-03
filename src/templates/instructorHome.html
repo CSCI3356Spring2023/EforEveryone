@@ -133,36 +133,61 @@
           </div>
 
           <div id="favorites" class="tabcontent">
+            {% for course in user_courses %}
             <div class = "course" id = "c1">
               <div class = "row">
-                <h3><strong>CSCI 3356 Software Engineering</strong></h3>
+                <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
                 <button class = "status-button" id = "status-button">Open</button>
-                {% for course in all_courses %}
                   {% url 'applicationView' course.id as the_url %}
                   
                  <!-- currently creating a button for every application -->
                   {% if the_url %}
                   <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
                   {% endif %}
-                {% endfor %}
+
                 <input class="star" type="checkbox" title="bookmark page">
               </div>
-              <h4>Marques Samary, Maira R</h4>
-              <h4>MWF 10:00AM - 10:50AM</h4>
-              <p>
-                This course covers the basic life cycle of software development: requirements, design, implementation, testing, and 
-                production release. Students will learn the theory related to software engineering, but they will also learn hands-on 
-                how to create their own software. The main evaluation of the course is a team project that will simulate a small real project. 
-                The project will be done using the framework Django (Python), the CSS Framework Bootstrap, among other technologies. 
-                The project will be worth 50% of the grade, as well as 2 midterms, an exam, and a peer assessment (how your team members 
-                evaluate the work you did).</p>
-
+              <h4>{{ course.instructor }}</h4>
+              <h4>
+                {% for day in course.days %}
+                  {% if day == "0" %}
+                    M
+                  {% endif %}
+                  {% if day == "1" %}
+                    T
+                  {% endif %}
+                  {% if day == "2" %}
+                    W
+                  {% endif %}
+                  {% if day == "3" %}
+                    Th
+                  {% endif %}
+                  {% if day == "4" %}
+                    F
+                  {% endif %}
+                  {% if day == "5" %}
+                    Sat
+                  {% endif %}
+                  {% if day == "6" %}
+                    Sun
+                  {% endif %}
+                {% endfor %}
+                {{ course.startTime|date:'H:i'}}-{{course.endTime|date:'H:i'}}</h4>
+              {{ course.courseDescription }}
+              <br>
+              <br>
+              <h4>For applying TAs</h4>
+              {{course.relevantInfo}}
+              <br>
+              <br>
               <div class = "row" id = "info">
-                Discussion Section: Yes &nbsp &nbsp &nbsp Number of TAs: 2 &nbsp &nbsp &nbsp Grading Meetings: Yes &nbsp &nbsp &nbsp Number of Office Hours per Week: 2
+                Discussion Section: {{course.hasDiscussion|yesno:"Yes,No" }} &nbsp &nbsp &nbsp Number of TAs: {{course.numberOfTAs}} &nbsp &nbsp &nbsp Grading Meetings: {{course.homeworkGradedInMeetings|yesno:"Yes,No"}} &nbsp &nbsp &nbsp Number of Office Hours per Week: {{course.officeHoursPerWeek}}
                 <a class="button" id = "apply-button" href="/add-course-form">Edit</a>
+              </div>
 
               </div>
             </div>
+            {% endfor %}
           </div>
 
           <div id="applied-to" class="tabcontent">
