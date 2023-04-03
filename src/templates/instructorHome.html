@@ -137,8 +137,12 @@
               <div class = "row">
                 <h3><strong>CSCI 3356 Software Engineering</strong></h3>
                 <button class = "status-button" id = "status-button">Open</button>
-                <button class = "status-button" id = "app-button">View Applications</button>
-
+                {% for course in all_courses %}
+                  {% url 'applicationView' course.id as the_url %}
+                  {% if the_url %}
+                  <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
+                  {% endif %}
+                {% endfor %}
                 <input class="star" type="checkbox" title="bookmark page">
               </div>
               <h4>Marques Samary, Maira R</h4>
@@ -163,7 +167,6 @@
          
 
             {% for application in all_applications %}
-            abcd
             {{application.name}}
 
             <div class = "application-list" id = "c2">

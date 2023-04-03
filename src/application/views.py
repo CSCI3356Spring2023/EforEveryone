@@ -25,4 +25,9 @@ def Application_Creation_View(request, courseID):
             print(applicationForm.errors)
     return render(request, "applyToCourse.html", context)
 
+def Application_View(request, courseID):
+    
+    context = {
+    }
+    return render(request, "applicationView.html", context)
 
