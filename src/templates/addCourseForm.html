@@ -61,6 +61,7 @@
         </div>
         <div id = "empty-discussion-form" class="hidden">{{discussionForm.empty_form.as_p}}</div>
         <button id="add-more-discussion" type="button">Add Discussion</button>
+        <button id="remove-discussion" type="button">Remove Discussion</button>
         {% endif %}
         <h3>Publish</h3>
         <input type="submit" value="Publish">
@@ -81,9 +82,11 @@
       {
         event.preventDefault();
       }
+      
       const currentDiscussionForms = document.getElementsByClassName("discussion-form");
       let currentdiscussionFormCount = currentDiscussionForms.length;
       const discussionCopyTarget = document.getElementById("discussion-form-list");
+      //discussionCopyTarget.style.display = 'inline'
       const copyEmptyDiscussionForm = document.getElementById("empty-discussion-form").cloneNode(true);
       copyEmptyDiscussionForm.setAttribute('class', "discussion-form");
       copyEmptyDiscussionForm.setAttribute('id', `discussionForm-${currentdiscussionFormCount}`);
@@ -91,8 +94,24 @@
       copyEmptyDiscussionForm.innerHTML = copyEmptyDiscussionForm.innerHTML.replace(regex, currentdiscussionFormCount);
       totalNewForms.setAttribute("value", currentdiscussionFormCount+1);
       discussionCopyTarget.append(copyEmptyDiscussionForm);
+      
     }
 
   </script>
+  
+  <script>
+      const removeDiscussionButton = document.getElementById("remove-discussion");
+      
+      removeDiscussionButton.addEventListener('click', remove_discussion);
+      var div = document.getElementById("discussion-form-list");
+
+      function remove_discussion(args)
+      {
+        div.remove()
+
+        
+      }
+  
+    </script>
 
 </html>
