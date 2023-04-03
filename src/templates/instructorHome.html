@@ -139,6 +139,8 @@
                 <button class = "status-button" id = "status-button">Open</button>
                 {% for course in all_courses %}
                   {% url 'applicationView' course.id as the_url %}
+                  
+                 <!-- currently creating a button for every application -->
                   {% if the_url %}
                   <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
                   {% endif %}

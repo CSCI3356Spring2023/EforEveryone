@@ -27,7 +27,7 @@
     />
 
     <!-- Import the webpage's javascript file -->
-    <script src="{% static 'studentHome.js' %}" defer></script>
+    <script src="{% static 'instructorHome.js' %}" defer></script>
   </head>
   
   <body>
@@ -41,14 +41,24 @@
     </div>
   
     {% block content %}
-    <h2>test</h2>
+    
+    <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
+    <br> <br>
+    
+    {% for course in all_courses %}
+      {{course.courseNumber}}/{{course.courseSection}} {{course.courseName}} <br>
+
       {% for application in all_applications %}
-        {{application.id}}
-        {{course.id}}
-        {% if application.course == course.id %}
-          {{application.name}}
+
+        {% if application.course.courseNumber == course.courseNumber %}
+          {% if application.course.courseSection == course.courseSection %}
+            {{application.name}}<br>
+          {% endif %}
         {% endif %}
+
       {% endfor %}
+    <br>
+    {% endfor %}
     {% endblock %}
   </body>
 </html>
