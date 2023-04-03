@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms.models import BaseModelFormSet
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Course(models.Model):
@@ -17,6 +18,7 @@ class Course(models.Model):
     relevantInfo = models.TextField(blank=True, null=True)
     numberOfTAs = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
+    instructorUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = False, blank=True, null=True)
 
     def __str__(self):
         return str(self.courseNumber) + "/" + str(self.courseSection) + " " + self.courseName

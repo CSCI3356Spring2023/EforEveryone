@@ -21,6 +21,7 @@ def Course_Creation_View(request):
         if all([courseForm.is_valid(), discussionForm.is_valid()]):
             course = courseForm.save(commit=False)
             course.instructor = request.user.first_name + ' ' + request.user.last_name
+            course.instructorUser = request.user
             course.save()
             for form in discussionForm:
                 discussion = form.save(commit=False)
