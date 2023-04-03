@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 from course.models import Course
+from application.models import Application
 
 # Create your views here.
 def logIn_view(request, *args, **kwargs):
@@ -39,9 +40,14 @@ def logOut_view(request):
 @login_required(login_url='/logIn')
 def instructorHome_view(request, *args, **kwargs):
     courseDataAll = Course.objects.all()
+    teacherApplications = Application.objects.all()
     context = {
-        "all_courses" : courseDataAll
+        "all_courses" : courseDataAll,
+        "all_applications" : teacherApplications
     }
+    print(teacherApplications[0])
+    
+
     return render(request, "instructorHome.html", context)
 
 @login_required(login_url='/logIn')
