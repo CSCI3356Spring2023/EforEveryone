@@ -129,7 +129,7 @@
             </div>
             {% endfor %}
   
-            {% endblock %}
+         
           </div>
 
           <div id="favorites" class="tabcontent">
@@ -137,8 +137,12 @@
               <div class = "row">
                 <h3><strong>CSCI 3356 Software Engineering</strong></h3>
                 <button class = "status-button" id = "status-button">Open</button>
-                <button class = "status-button" id = "app-button">View Applications</button>
-
+                {% for course in all_courses %}
+                  {% url 'applicationView' course.id as the_url %}
+                  {% if the_url %}
+                  <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
+                  {% endif %}
+                {% endfor %}
                 <input class="star" type="checkbox" title="bookmark page">
               </div>
               <h4>Marques Samary, Maira R</h4>
@@ -160,7 +164,18 @@
           </div>
 
           <div id="applied-to" class="tabcontent">
-            <p>Unsure if this should go here. Could be on the top bar next to "Add Course", or under "MY Profile"</p>
+         
+
+            {% for application in all_applications %}
+            {{application.name}}
+
+            <div class = "application-list" id = "c2">
+              <div class = "row">
+                <h3><strong>{{application.name}}</strong></h3>
+              </div>
+            </div>
+            {% endfor %}
+            {% endblock %}
           </div>
           
           <div class = "classes" id = "class">

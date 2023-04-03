@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import ApplicationCreationForm
 from course.models import Course
+from application.models import Application
 # Create your views here.
 
 
@@ -26,3 +27,11 @@ def Application_Creation_View(request, courseID):
     return render(request, "applyToCourse.html", context)
 
 
+def Application_View(request, *args, **kwargs):
+    courseDataAll = Course.objects.all()
+    teacherApplications = Application.objects.all()
+    context = {
+        "all_courses" : courseDataAll,
+        "all_applications" : teacherApplications
+    }
+    return render(request, "applicationView.html", context)
