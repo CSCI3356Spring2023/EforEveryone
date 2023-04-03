@@ -18,6 +18,9 @@ class Course(models.Model):
     numberOfTAs = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
 
+    def __str__(self):
+        return str(self.courseNumber) + "/" + str(self.courseSection) + " " + self.courseName
+
 class Discussion(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     discussionNumber = models.IntegerField(default=0)

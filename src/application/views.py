@@ -13,10 +13,10 @@ def Application_Creation_View(request, courseID):
         "course" : course,
     }
     if (request.method == "POST"):
-        print(request.POST)
         applicationForm = ApplicationCreationForm(request.POST)
         if (applicationForm.is_valid()):
             application = applicationForm.save(commit=False)
+            application.course = course
             application.name = request.user.first_name + ' ' + request.user.last_name
             application.save()
             context['message'] = 'Data saved.'
