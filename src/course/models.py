@@ -1,6 +1,9 @@
 from django.db import models
 from django.forms.models import BaseModelFormSet
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver 
 
 # Create your models here.
 class Course(models.Model):
@@ -34,3 +37,22 @@ class DiscussionFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         super(DiscussionFormSet, self).__init__(*args, **kwargs)
         self.queryset = Discussion.objects.none()
+
+# Extending the User model using a one-to-one link
+# Add the field to keep track of the number of open applications (max 5)
+
+# Define signals so our Profile model will be automatically 
+# created/updated when we create/update User instances.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    usedApplications = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
