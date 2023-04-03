@@ -36,9 +36,19 @@
       <div class = "row" id = "top-bar">
         <div class = "header"> TA Application i Instructors </div> 
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
-        <a class="button" id = "home-button" href="/studentHome">Back To Home</a>
+        <a class="button" id = "home-button" href="/instructorHome">Back To Home</a>
       </div>
     </div>
-    
+  
+    {% block content %}
+    <h2>test</h2>
+      {% for application in all_applications %}
+        {{application.id}}
+        {{course.id}}
+        {% if application.course == course.id %}
+          {{application.name}}
+        {% endif %}
+      {% endfor %}
+    {% endblock %}
   </body>
 </html>

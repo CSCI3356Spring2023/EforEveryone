@@ -45,10 +45,9 @@ def instructorHome_view(request, *args, **kwargs):
         "all_courses" : courseDataAll,
         "all_applications" : teacherApplications
     }
-    print(teacherApplications[0])
-    
-
     return render(request, "instructorHome.html", context)
+
+
 
 @login_required(login_url='/logIn')
 def studentHome_view(request, *args, **kwargs):
