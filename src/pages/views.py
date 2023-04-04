@@ -53,8 +53,13 @@ def instructorHome_view(request, *args, **kwargs):
 @login_required(login_url='/logIn')
 def studentHome_view(request, *args, **kwargs):
     courseDataAll = Course.objects.all()
+    applications = Application.objects.filter(applicantUser = request.user)
+    appliedCourses=[]
+    for application in applications:
+        appliedCourses.append(application.course)
     context = {
-        "all_courses" : courseDataAll
+        "all_courses" : courseDataAll,
+        "applied_courses" : appliedCourses
     }
     return render(request, "studentHome.html", context)
 

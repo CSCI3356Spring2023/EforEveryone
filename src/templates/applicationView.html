@@ -45,14 +45,18 @@
     <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
     <br> <br>
 
-      {% for application in all_applications %}
-
-        {% if application.course.courseNumber == course.courseNumber %}
-          {% if application.course.courseSection == course.courseSection %}
-            {{application.name}}<br>
-          {% endif %}
-        {% endif %}
-
+      {% for application in course_applications %}
+      <div class = "application-list" id = "c2">
+        <div class = "row">
+          {{application.name}} - {{application.eagleID}}
+          <br>
+          Course history - {{application.courseHistory}}
+          <br>
+          Interest - {{application.interest}}
+          <br>
+          Relevant experience - {{application.experience}}
+        </div>
+      </div>
       {% endfor %}
     <br>
     {% endblock %}

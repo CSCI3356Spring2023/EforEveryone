@@ -29,9 +29,9 @@ def Application_Creation_View(request, courseID):
 
 def Application_View(request, courseID):
     course = Course.objects.get(id = courseID)
-    applications = Application.objects.all()
+    applications = Application.objects.filter(course = course)
     context = {
         "course" : course,
-        "all_applications" : applications
+        "course_applications" : applications
     }
     return render(request, "applicationView.html", context)
