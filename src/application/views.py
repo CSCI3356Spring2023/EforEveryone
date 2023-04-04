@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import ApplicationCreationForm
-from course.models import Course
+from course.models import Course, Profile
 from application.models import Application
 # Create your views here.
 
@@ -16,6 +16,9 @@ def Application_Creation_View(request, courseID):
     if (request.method == "POST"):
         applicationForm = ApplicationCreationForm(request.POST)
         if (applicationForm.is_valid()):
+            profile = get_object_or_404(Profile, user=request.user)
+            profile.usedApplications += 1
+            profile.save()
             application = applicationForm.save(commit=False)
             application.course = course
             application.name = request.user.first_name + ' ' + request.user.last_name
