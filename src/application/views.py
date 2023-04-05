@@ -17,6 +17,13 @@ def Application_Creation_View(request, courseID):
         applicationForm = ApplicationCreationForm(request.POST)
         if (applicationForm.is_valid()):
             profile = get_object_or_404(Profile, user=request.user)
+            
+            # if profile.usedApplications > 5 {
+            #     print("You have 5 applications in review and cannot submit anymore at this time.") 
+            # }
+
+            # otherwise do everything correctly
+            
             profile.usedApplications += 1
             profile.save()
             application = applicationForm.save(commit=False)
