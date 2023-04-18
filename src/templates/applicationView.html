@@ -41,11 +41,13 @@
     </div>
   
     {% block content %}
-    
-    <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
-    <br> <br>
 
+    <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
+   
+    <br> <br>
+    
       {% for application in course_applications %}
+      
       <div class = "application-list" id = "c2">
         <div class = "row">
           {{application.name}} - {{application.eagleID}}

@@ -73,7 +73,7 @@
           <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'all-courses')" id = "defaultOpen">All Courses</button>
             <button class="tablinks" onclick="openCity(event, 'favorites')">My Courses</button>
-            <button class="tablinks" onclick="openCity(event, 'applied-to')">Review Applications</button>
+            <button class="tablinks" onclick="openCity(event, 'review-apps')">Review Applications</button>
           </div>
 
           <!-- Tab content -->
@@ -188,26 +188,30 @@
             </div>
             {% endfor %}
           </div>
-            
-          </div>
-
-          <div id="applied-to" class="tabcontent">
-         
-
+          <div id="review-apps" class="tabcontent">
+                       
             {% for application in all_applications %}
-            {{application.name}}
-
+      
             <div class = "application-list" id = "c2">
               <div class = "row">
-                <h3><strong>{{application.name}}</strong></h3>
+                Course - {{application.course}}
+                <br>
+                {{application.name}} - {{application.eagleID}}
+                <br>
+                Course history - {{application.courseHistory}}
+                <br>
+                Interest - {{application.interest}}
+                <br>
+                Relevant experience - {{application.experience}}
               </div>
             </div>
             {% endfor %}
-            {% endblock %}
           </div>
+          {% endblock %}
+        </div>
+
           
-          <div class = "classes" id = "class">
-            </div>
+          
           
           
         </div>

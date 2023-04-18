@@ -41,10 +41,16 @@ def logOut_view(request):
 def instructorHome_view(request, *args, **kwargs):
     courseDataAll = Course.objects.all()
     courseDataUser = Course.objects.filter(instructorUser=request.user)
-    
+    applications = Application.objects.all()
+    instructor_applications = []
+    for application in applications:
+        if application.course in courseDataUser:
+            instructor_applications.append(application)
+
     context = {
         "all_courses" : courseDataAll,
         "user_courses" : courseDataUser,
+        "all_applications" : instructor_applications
     }
     return render(request, "instructorHome.html", context)
 
