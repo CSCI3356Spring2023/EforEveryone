@@ -1,8 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .forms import ApplicationCreationForm
+from django.contrib.auth.models import User
 from course.models import Course, Profile
 from application.models import Application
 # Create your views here.
+
+@login_required(login_url='/logIn')
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    return render(request, 'profilePage.html', {'profile': profile, 'user': user})
 
 
 def Application_Creation_View(request, courseID):

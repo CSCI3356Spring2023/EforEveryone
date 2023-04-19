@@ -19,7 +19,7 @@ from django.urls import include, path
 #Custom urls
 from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, send_email
 from course.views import Course_Creation_View
-from application.views import Application_Creation_View, Application_View
+from application.views import Application_Creation_View, Application_View, profile
 
 urlpatterns = [
     path('', logIn_view),
@@ -35,6 +35,7 @@ urlpatterns = [
     path('logIn/', logIn_view),
     path('logOut/', logOut_view),
     path('send_email/', send_email, name='send_email'),
+    path('profile/<username>/', profile, name='profile'),
 ]
 
 # urlpatterns += [
