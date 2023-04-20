@@ -35,6 +35,29 @@
     background-color: #8a100b;
     border-color: white;
     }
+
+    .accept-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 16px;
+    }
+
+    .reject-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+   }
   </style>
 
   <body>
@@ -206,6 +229,8 @@
                 Interest - {{application.interest}}
                 <br>
                 Relevant experience - {{application.experience}}
+                <button class="accept-button">Accept</button>
+                <button class="reject-button">Reject</button>
               </div>
             </div>
             {% endfor %}
