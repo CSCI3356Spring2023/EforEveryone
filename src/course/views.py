@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import CourseCreationForm, CourseCreationFormRaw, DiscussionForm
 from .models import Course, Discussion, DiscussionFormSet
@@ -28,9 +28,30 @@ def Course_Creation_View(request):
                 discussion.course = course
                 discussion.save()
             context['message'] = 'Data saved.'
+            return redirect('instructorHome')
         else:
             print(courseForm.errors)
     return render(request, "addCourseForm.html", context)
+
+def Course_Edit_View(request, courseID):
+    course = Course.objects.get(id = courseID)
+    courseForm = CourseCreationForm(instance = course)
+    context = {
+        "courseForm" : courseForm,
+    }
+    if (request.method == "POST"):
+        courseForm = CourseCreationForm(request.POST, instance = course)
+        discussionFormSet = modelformset_factory(Discussion, form=DiscussionForm, formset=DiscussionFormSet, extra=0)
+        discussionForm = discussionFormSet(request.POST or None)
+        if all([courseForm.is_valid(), discussionForm.is_valid()]):
+            course = courseForm.save()
+            context['message'] = 'Data saved.'
+            return redirect('instructorHome')
+        else:
+            print(courseForm.errors)
+    return render(request, "editCourseForm.html", context)
+    
+
 
 # def Course_Creation_View(request):
 #     print(request.method)
