@@ -40,19 +40,25 @@
       
     <div class = "header-box">
       <div class = "row" id = "top-bar">
-        <div class = "header"> Add Course </div> 
+        <div class = "header"> Edit Course </div> 
         <button class = "button" id = "profile-button" value = "-1">My Profile</button>
         <a class="button" id = "home-button" href="/instructorHome">Back To Home</a>
       </div>
     </div>
     
     {% block content %}
+    <h3>Delete</h3>
+    <form action="{% url 'courseDeleteView' course.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Course">
+    </form>
+    <h3>Edit</h3>
     <form method="post">{%csrf_token %}
         {{courseForm.as_p}}
         
         <h3>Publish</h3>
-        <input type="submit" value="Publish">
-      </form>
+        <input type="submit" value="Publish Changes">
+    </form>
     {% endblock %}
     
   </body>

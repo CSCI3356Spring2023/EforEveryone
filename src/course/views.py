@@ -38,6 +38,7 @@ def Course_Edit_View(request, courseID):
     courseForm = CourseCreationForm(instance = course)
     context = {
         "courseForm" : courseForm,
+        "course" : course
     }
     if (request.method == "POST"):
         courseForm = CourseCreationForm(request.POST, instance = course)
@@ -51,6 +52,19 @@ def Course_Edit_View(request, courseID):
             print(courseForm.errors)
     return render(request, "editCourseForm.html", context)
     
+def Course_Delete_View(request, courseID):
+    course = Course.objects.get(id = courseID)
+    courseForm = CourseCreationForm(instance = course)
+    context = {
+        "courseForm" : courseForm,
+    }
+
+    if request.method == 'POST':       
+        course.delete()          
+        return redirect('instructorHome') 
+
+    return render(request, "editCourseForm.html", context)    
+            
 
 
 # def Course_Creation_View(request):
