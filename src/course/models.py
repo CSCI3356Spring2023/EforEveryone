@@ -7,6 +7,8 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Course(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     courseNumber = models.IntegerField(default=0)
     courseName = models.CharField(max_length=100, blank=True, default='Name')
     courseSection = models.IntegerField(default=0)

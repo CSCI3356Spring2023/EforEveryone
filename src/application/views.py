@@ -47,7 +47,7 @@ def Application_Creation_View(request, courseID):
 
 def Application_View(request, courseID):
     course = Course.objects.get(id = courseID)
-    applications = Application.objects.filter(course = course)
+    applications = Application.objects.filter(course = course).order_by('-created_at')
     context = {
         "course" : course,
         "course_applications" : applications

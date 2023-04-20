@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Application(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100, blank=True, default='Name')
     email = models.CharField(max_length=100, blank=True, default='Email')
     eagleID = models.IntegerField(default=0)

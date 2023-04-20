@@ -39,9 +39,9 @@ def logOut_view(request):
 
 @login_required(login_url='/logIn')
 def instructorHome_view(request, *args, **kwargs):
-    courseDataAll = Course.objects.all()
-    courseDataUser = Course.objects.filter(instructorUser=request.user)
-    applications = Application.objects.all()
+    courseDataAll = Course.objects.all().order_by('-created_at')
+    courseDataUser = Course.objects.filter(instructorUser=request.user).order_by('-created_at')
+    applications = Application.objects.all().order_by('-created_at')
     instructor_applications = []
     for application in applications:
         if application.course in courseDataUser:
@@ -58,8 +58,8 @@ def instructorHome_view(request, *args, **kwargs):
 
 @login_required(login_url='/logIn')
 def studentHome_view(request, *args, **kwargs):
-    courseDataAll = Course.objects.all()
-    applications = Application.objects.filter(applicantUser = request.user)
+    courseDataAll = Course.objects.all().order_by('-created_at')
+    applications = Application.objects.filter(applicantUser = request.user).order_by('-created_at')
     appliedCourses=[]
     for application in applications:
         appliedCourses.append(application.course)
