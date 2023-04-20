@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ApplicationCreationForm
 from django.contrib.auth.models import User
 from course.models import Course, Profile
 from application.models import Application
+from django.core.mail import send_mail
 # Create your views here.
 
 @login_required(login_url='/logIn')
@@ -53,3 +54,23 @@ def Application_View(request, courseID):
         "course_applications" : applications
     }
     return render(request, "applicationView.html", context)
+
+def accept_application(request, application_id):
+    # Get the application object from the database
+    application = get_object_or_404(Application, id=application_id)
+
+    # Send an email to the student associated with the application
+    send_mail(
+        'Your application has been accepted',
+        'Congratulations! Your application for {} has been accepted.'.format(application.course),
+        'from@example.com',
+        [application.email],
+        fail_silently=False,
+    )
+
+    # Mark the application as accepted in the database
+    application.status = 'Accepted'
+    application.save()
+
+    # Redirect to the application list page
+    return redirect('instructorHome')

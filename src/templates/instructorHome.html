@@ -229,8 +229,9 @@
                 Interest - {{application.interest}}
                 <br>
                 Relevant experience - {{application.experience}}
-                <button class="accept-button">Accept</button>
+                <a href="{% url 'accept_application' application.id %}" class="accept-button">Accept</a>
                 <button class="reject-button">Reject</button>
+                
               </div>
             </div>
             {% endfor %}
