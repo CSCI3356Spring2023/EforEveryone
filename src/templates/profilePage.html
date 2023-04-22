@@ -1,23 +1,74 @@
-{% extends 'base.html' %}
-{% load static %} 
-{% block head_title %}{{ user.username }}{% endblock head_title %}
 
-{% block content %} 
-<div class="container-fluid mt-5">
-    <div class="row">
-        <div class="card col-lg-6 offset-lg-3 mb-3">
-            <div class="row">
-                {% if user.profile.image %} 
-                <img class="card-img-top col-sm-3 col-4 my-3" src="{{ profile.image.url }}" alt="{{ user.username }}"> 
-                {% else %} 
-                <img class="card-img-top col-sm-3 col-4 my-3" src="{% static 'img/avatar.svg' %}" alt="{{ user.username }}">
-                {% endif %} 
-                <div class="card-body col-9"> 
-                    <h2 class="card-title my-3">{{ user.username }}</h2>
-                    <p>Last login on: {{ user.last_login }}</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Profile</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="{% static 'profilePage.js' %}" defer></script>
+  </head>
+
+  <style>
+    #logOut-button{
+    background-color: #8a100b;
+    border-color: white;
+    }
+  </style>
+
+  <body>
+    <div class = "header-box">
+      <div class = "row" id = "top-bar">
+        <div class = "header"> Profile </div> 
+        <span class="header">Hello, {{request.user.username}}. </span>
+        <a class = "button" id = "logOut-button" href='/logOut' value = "-1">Log Out</a>
+      </div>
+    </div>
+
+    {% block content %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="card col-lg-6 offset-lg-3 mb-3">
+                <div class="row">
+                    {% if request.user.image %} 
+                    <img class="card-img-top col-sm-3 col-4 my-3" src="{{ image.url }}" alt="{{ request.user.username }}">
+                    {% else %} 
+                    <img class="card-img-top col-sm-3 col-4 my-3" src="{% static 'img/profile-picture-icon-django.png' %}" alt="{{ request.user.username }}">
+                    {% endif %} 
+                    <div class="card-body col-9">
+                        <h2 class="card-title my-3">{{ request.user.username }}</h2>
+                        <p>Last login on: {{ request.user.last_login }}</p>
+                        <p>Number of used applications: {{ request.user.profile.usedApplications }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
+  </body>
+</html>
+
+
+

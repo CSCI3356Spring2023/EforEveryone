@@ -7,12 +7,6 @@ from application.models import Application
 from django.core.mail import send_mail
 # Create your views here.
 
-@login_required(login_url='/logIn')
-def profile(request, username):
-    user = get_object_or_404(User, username=username)
-    profile = get_object_or_404(Profile, user=user)
-    return render(request, 'profilePage.html', {'profile': profile, 'user': user})
-
 
 def Application_Creation_View(request, courseID):
     applicationForm = ApplicationCreationForm()

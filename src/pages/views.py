@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
+from course.models import Profile
+from django.contrib.auth.models import User
 
 from course.models import Course
 from application.models import Application
@@ -36,6 +38,15 @@ def logIn_view(request, *args, **kwargs):
 def logOut_view(request):
     logout(request)
     return redirect('/logIn')
+
+@login_required(login_url='/logIn')
+def profile_view(request, username): 
+    user = get_object_or_404(User, username=request.user.username)
+
+    context = {
+        "user" : user,
+    }
+    return render(request, 'profilePage.html', context)
 
 @login_required(login_url='/logIn')
 def instructorHome_view(request, *args, **kwargs):
