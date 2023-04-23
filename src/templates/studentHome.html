@@ -37,14 +37,16 @@
     }
   </style>
 
+
   <body>
     <div class = "header-box">
       <div class = "row" id = "top-bar">
         <div class = "header"> TA application - Students </div> 
         <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
         <a class = "button" id = "logOut-button" href='/logOut'>Log Out</a>
-        <button class = "button" id = "profile-button" href = "profilePage.html" value = "-1">My Profile</button>
-        <!--<a class="button" id = "add-button" href="add-course.html">Add Course</a>-->
+        {% url 'profile_view_s' request.user.username as profile_url %}
+        <a class = "button" id = "profile-button" href="{{profile_url}}">My Profile</a>
+ 
       </div>
       
       <div class = "row" id = "second-bar"> Keywords
@@ -75,7 +77,6 @@
             <button class="tablinks" onclick="openCity(event, 'favorites')">Favorites</button>
             <button class="tablinks" onclick="openCity(event, 'applied-to')">Applied To</button>
           </div>
-
           {% block content %}
           <!-- ALL COURSES -->
           <div id="all-courses" class="tabcontent">

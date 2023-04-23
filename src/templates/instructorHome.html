@@ -60,13 +60,15 @@
    }
   </style>
 
+{% block content %}
   <body>
     <div class = "header-box">
       <div class = "row" id = "top-bar">
         <div class = "header"> TA application - Instructors </div> 
         <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
         <a class = "button" id = "logOut-button" href='/logOut'>Log Out</a>
-        <button class = "button" id = "profile-button" value = "-1">My Profile</button>
+        {% url 'profile_view_i' request.user.username as profile_url %}
+        <a class = "button" id = "profile-button" href="{{profile_url}}">My Profile</a>
         <a class="button" id = "add-button" href="/add-course-form">Add Course</a>
       </div>
       
@@ -101,7 +103,7 @@
 
           <!-- Tab content -->
           <div id="all-courses" class="tabcontent">
-            {% block content %}
+         
 
             {% for course in all_courses %}
             <div class = "course" id = "c2">
@@ -162,7 +164,7 @@
                 <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
                 <button class = "status-button" id = "status-button">Open</button>
                   {% url 'applicationView' course.id as the_url %}
-                  
+                  {{the_url}}
                  <!-- currently creating a button for every application -->
                   {% if the_url %}
                   <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
