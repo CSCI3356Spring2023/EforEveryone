@@ -22,6 +22,7 @@ class Course(models.Model):
     officeHoursPerWeek = models.IntegerField(default=0)
     relevantInfo = models.TextField(blank=True, null=True)
     numberOfTAs = models.IntegerField(default=0)
+    numberOfAcceptedTAs = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     instructorUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = True, blank=True, null=True)
 

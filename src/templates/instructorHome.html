@@ -162,9 +162,12 @@
             <div class = "course" id = "c1">
               <div class = "row">
                 <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
-                <button class = "status-button" id = "status-button">Open</button>
+                {% if course.status %}
+                  <button class = "status-button" id = "status-button2">Open</button>
+                {% else %}
+                  <button class = "status-button" id = "closed-button">Closed</button>
+                {% endif %}
                   {% url 'applicationView' course.id as the_url %}
-                  {{the_url}}
                  <!-- currently creating a button for every application -->
                   {% if the_url %}
                   <a class="button" id = "apply-button" href="{{ the_url}}">View Applications</a>
@@ -231,8 +234,12 @@
                 Interest - {{application.interest}}
                 <br>
                 Relevant experience - {{application.experience}}
-                <a href="{% url 'accept_application' application.id %}" class="accept-button">Accept</a>
+                {% if application.status%}
+                <a class="button" href="{% url 'accept_application' application.id %}" id="accept-button">Accept</a>
                 <button class="reject-button">Reject</button>
+                {% else %}
+                <button class = "status-button" id = "closed-button">Accepted</button>
+                {% endif %}
                 
               </div>
             </div>
@@ -240,18 +247,12 @@
           </div>
           {% endblock %}
         </div>
-
-          
-          
-          
-          
+         
         </div>
         
       </div>
       
     </div>
-    
-    
-    
+   
   </body>
 </html>

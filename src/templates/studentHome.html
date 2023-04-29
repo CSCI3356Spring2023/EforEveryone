@@ -81,59 +81,59 @@
           <!-- ALL COURSES -->
           <div id="all-courses" class="tabcontent">
 
-          
-
-          {% for course in all_courses %}
-          <div class = "course" id = "c2">
-            <div class = "row">
-              <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
-              {% if course.status %}
-                <button class = "status-button" id = "status-button2">Open</button>
-              {% else %}
-                <button class = "status-button" id = "closed-button">Closed</button>
-              {% endif %}
+          {% for course in all_courses%}
+            {% if course.status %}
+            <div class = "course" id = "c2">
+              <div class = "row">
+                <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
+                {% if course.status %}
+                  <button class = "status-button" id = "status-button2">Open</button>
+                {% else %}
+                  <button class = "status-button" id = "closed-button">Closed</button>
+                {% endif %}
+              </div>
+              <h4>{{ course.instructor }}</h4>
+              <h4>
+                {% for day in course.days %}
+                  {% if day == "0" %}
+                    M
+                  {% endif %}
+                  {% if day == "1" %}
+                    T
+                  {% endif %}
+                  {% if day == "2" %}
+                    W
+                  {% endif %}
+                  {% if day == "3" %}
+                    Th
+                  {% endif %}
+                  {% if day == "4" %}
+                    F
+                  {% endif %}
+                  {% if day == "5" %}
+                    Sat
+                  {% endif %}
+                  {% if day == "6" %}
+                    Sun
+                  {% endif %}
+                {% endfor %}
+                {{ course.startTime|date:'H:i'}}-{{course.endTime|date:'H:i'}}</h4>
+              {{ course.courseDescription }}
+              <br>
+              <br>
+              <h4>For applying TAs</h4>
+              {{course.relevantInfo}}
+              <br>
+              <br>
+              <div class = "row" id = "info">
+                Discussion Section: {{course.hasDiscussion|yesno:"Yes,No" }} &nbsp &nbsp &nbsp Number of TAs: {{course.numberOfTAs}} &nbsp &nbsp &nbsp Grading Meetings: {{course.homeworkGradedInMeetings|yesno:"Yes,No"}} &nbsp &nbsp &nbsp Number of Office Hours per Week: {{course.officeHoursPerWeek}}
+                {% url 'studentApply' course.id as the_url %}
+                {% if the_url and course not in applied_courses%}
+                <a class="button" id = "apply-button" href="{{ the_url}}">Apply</a>
+                {% endif %}
+              </div>
             </div>
-            <h4>{{ course.instructor }}</h4>
-            <h4>
-              {% for day in course.days %}
-                {% if day == "0" %}
-                  M
-                {% endif %}
-                {% if day == "1" %}
-                  T
-                {% endif %}
-                {% if day == "2" %}
-                  W
-                {% endif %}
-                {% if day == "3" %}
-                  Th
-                {% endif %}
-                {% if day == "4" %}
-                  F
-                {% endif %}
-                {% if day == "5" %}
-                  Sat
-                {% endif %}
-                {% if day == "6" %}
-                  Sun
-                {% endif %}
-              {% endfor %}
-              {{ course.startTime|date:'H:i'}}-{{course.endTime|date:'H:i'}}</h4>
-            {{ course.courseDescription }}
-            <br>
-            <br>
-            <h4>For applying TAs</h4>
-            {{course.relevantInfo}}
-            <br>
-            <br>
-            <div class = "row" id = "info">
-              Discussion Section: {{course.hasDiscussion|yesno:"Yes,No" }} &nbsp &nbsp &nbsp Number of TAs: {{course.numberOfTAs}} &nbsp &nbsp &nbsp Grading Meetings: {{course.homeworkGradedInMeetings|yesno:"Yes,No"}} &nbsp &nbsp &nbsp Number of Office Hours per Week: {{course.officeHoursPerWeek}}
-              {% url 'studentApply' course.id as the_url %}
-              {% if the_url %}
-              <a class="button" id = "apply-button" href="{{ the_url}}">Apply</a>
-              {% endif %}
-            </div>
-          </div>
+            {% endif %}
           {% endfor %}
 
           
@@ -174,6 +174,7 @@
             <div class = "course" id = "c1">
               <div class = "row">
                 <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
+                
                 <button class = "status-button" id = "app-status">Awaiting Review</button>
               </div>
               <h4>{{ course.instructor }}</h4>

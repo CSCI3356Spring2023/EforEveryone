@@ -52,6 +52,7 @@ def Application_View(request, courseID):
 def accept_application(request, application_id):
     # Get the application object from the database
     application = get_object_or_404(Application, id=application_id)
+    course = Course.objects.get(courseName = application.course.courseName)
 
     # Send an email to the student associated with the application
     send_mail(
@@ -62,8 +63,14 @@ def accept_application(request, application_id):
         fail_silently=False,
     )
 
-    # Mark the application as accepted in the database
-    application.status = 'Accepted'
+    # Mark the application as accepted in the database, update the course status if needed
+    course.numberOfAcceptedTAs += 1
+    if course.numberOfAcceptedTAs == course.numberOfTAs:
+        course.status = False
+    
+    course.save()
+
+    application.status = False
     application.save()
 
     # Redirect to the application list page

@@ -14,6 +14,7 @@ class Application(models.Model):
     experience = models.TextField(blank=True, null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     applicantUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = True, blank=True, null=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.course.courseNumber) + "/" + str(self.course.courseSection) + "-" + self.name
