@@ -47,6 +47,7 @@ def Application_Creation_View(request, courseID):
             print(profile.usedApplications)
         else:
             print(applicationForm.errors)
+        return redirect('studentHome')
     return render(request, "applyToCourse.html", context)
 
 
