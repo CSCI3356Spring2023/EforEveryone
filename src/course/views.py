@@ -51,6 +51,25 @@ def Course_Edit_View(request, courseID):
         else:
             print(courseForm.errors)
     return render(request, "editCourseForm.html", context)
+
+def Course_Edit_View_Admin(request, courseID):
+    course = Course.objects.get(id = courseID)
+    courseForm = CourseCreationForm(instance = course)
+    context = {
+        "courseForm" : courseForm,
+        "course" : course
+    }
+    if (request.method == "POST"):
+        courseForm = CourseCreationForm(request.POST, instance = course)
+        discussionFormSet = modelformset_factory(Discussion, form=DiscussionForm, formset=DiscussionFormSet, extra=0)
+        discussionForm = discussionFormSet(request.POST or None)
+        if all([courseForm.is_valid(), discussionForm.is_valid()]):
+            course = courseForm.save()
+            context['message'] = 'Data saved.'
+            return redirect('adminHome')
+        else:
+            print(courseForm.errors)
+    return render(request, "adminEditCourseForm.html", context)
     
 def Course_Delete_View(request, courseID):
     course = Course.objects.get(id = courseID)
@@ -64,6 +83,19 @@ def Course_Delete_View(request, courseID):
         return redirect('instructorHome') 
 
     return render(request, "editCourseForm.html", context)    
+
+def Course_Delete_View_Admin(request, courseID):
+    course = Course.objects.get(id = courseID)
+    courseForm = CourseCreationForm(instance = course)
+    context = {
+        "courseForm" : courseForm,
+    }
+
+    if request.method == 'POST':       
+        course.delete()          
+        return redirect('/adminHome') 
+
+    return render(request, "adminEditCourseForm.html", context)  
             
 
 

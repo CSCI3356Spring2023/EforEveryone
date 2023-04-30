@@ -43,8 +43,8 @@
         <div class = "header"> TA application - Admin </div> 
         <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
         <a class = "button" id = "logOut-button" href='/logOut'>Log Out</a>
-        <button class = "button" id = "profile-button" value = "-1">My Profile</button>
-        <!-- <a class = "button" id = "profile-button" href = "/adminHome/profile/{{ request.user.username }}/" value = "-1">My Profile</a> -->
+        {% url 'profile_view_i' request.user.username as profile_url %}
+        <a class = "button" id = "profile-button" href="{{profile_url}}">My Profile</a>
         <a class="button" id = "add-button" href="/instructorHome/add-course">Add Course</a>
         <a class="button" id = "stu-button" >View Students</a>
         <a class="button" id = "instructor-button" >View Instructors</a>
@@ -129,6 +129,10 @@
               <br>
               <div class = "row" id = "info">
                 Discussion Section: {{course.hasDiscussion|yesno:"Yes,No" }} &nbsp &nbsp &nbsp Number of TAs: {{course.numberOfTAs}} &nbsp &nbsp &nbsp Grading Meetings: {{course.homeworkGradedInMeetings|yesno:"Yes,No"}} &nbsp &nbsp &nbsp Number of Office Hours per Week: {{course.officeHoursPerWeek}}
+                {% url 'courseEditViewAdmin' course.id as the_url %}
+                {% if the_url %}
+                  <a class="button" id = "apply-button" href="{{ the_url}}">Edit</a>
+                {% endif %}
               </div>
             </div>
             {% endfor %}

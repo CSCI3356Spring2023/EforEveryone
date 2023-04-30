@@ -42,7 +42,7 @@
     <div class = "header-box">
       <div class = "row" id = "top-bar">
         <div class = "header"> Profile </div> 
-        <span class="header">Hello, {{request.user.username}}. </span>
+        <span class="header">Hello, {{request.user.first_name}} {{request.user.last_name}}</span>
         <a class = "button" id = "logOut-button" href='/logOut' value = "-1">Log Out</a>
        <a class="button" id = "home-button" href="/{{ request.user.groups.all.first|stringformat:'s'|lower|add:'Home' }}">Back To Home</a>
       </div>
