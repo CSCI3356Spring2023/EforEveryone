@@ -60,6 +60,17 @@ def Application_View(request, courseID):
     }
     return render(request, "applicationView.html", context)
 
+def Admin_Application_View(request, courseID):
+    course = Course.objects.get(id = courseID)
+    applications = Application.objects.filter(course = course).order_by('-created_at')
+    openTAPositions = course.numberOfTAs - course.numberOfAcceptedTAs
+    context = {
+        "course" : course,
+        "openTAPositions": openTAPositions,
+        "course_applications" : applications
+    }
+    return render(request, "adminApplicationView.html", context)
+
 def accept_application(request, application_id):
     # Get the application object from the database
     application = get_object_or_404(Application, id=application_id)

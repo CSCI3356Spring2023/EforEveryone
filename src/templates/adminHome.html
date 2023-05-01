@@ -92,7 +92,11 @@
                 {% else %}
                   <button class = "status-button" id = "closed-button">Closed</button>
                 {% endif %}
-                <button class = "status-button" id = "app-button">View Applications</button>
+                {% url 'adminApplicationView' course.id as the_url %}
+                <!-- currently creating a button for every application -->
+                 {% if the_url %}
+                 <a class="button" id = "app-button" href="{{ the_url}}">View Applications</a>
+                 {% endif %}
               </div>
               <h4>{{ course.instructor }}</h4>
               <h4>

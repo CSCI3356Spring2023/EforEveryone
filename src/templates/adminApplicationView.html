@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>View Applications</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="{% static 'adminHome.js' %}" defer></script>
+  </head>
+  
+  <body>
+      
+    <div class = "header-box">
+      <div class = "row" id = "top-bar">
+        <div class = "header"> TA Application - Admin </div> 
+        <button class = "button" id = "profile-button" value = "-1">My Profile</button>
+        <a class="button" id = "home-button" href="/adminHome">Back To Home</a>
+      </div>
+    </div>
+  
+    {% block content %}
+
+    <h2>Applications for {{course.courseName}} {{course.courseNumber}}/{{course.courseSection}} with Professor {{course.instructor}}</h2>
+   
+    Number of Accepted TAs: {{course.numberOfAcceptedTAs}} 
+    <br>
+    Number of TAs still needed: {{ openTAPositions}}
+
+    <br> <br>
+    
+      {% for application in course_applications %}
+      
+      <div class = "application-list" id = "c2">
+        <div class = "row">
+          {{application.name}} - {{application.eagleID}}
+          <br>
+          Course history - {{application.courseHistory}}
+          <br>
+          Interest - {{application.interest}}
+          <br>
+          Relevant experience - {{application.experience}}
+        </div>
+        {% if application.pendingInstructorAccept %}
+          <a class="button" href="{% url 'accept_application' application.id %}" id="accept-button">Accept</a>
+          <a class="button" href="{% url 'reject_application' application.id %}" id="reject-button">Reject</a>
+        {% elif not application.pendingInstructorAccept and not application.acceptedByStudent %}
+           <button class = "status-button" id = "closed-button">Accepted - Pending Student Response</button>
+        {% else %}
+           <button class = "status-button" id = "closed-button">Accepted and Confirmed</button>
+        {% endif %}
+      </div>
+      {% endfor %}
+    <br>
+    {% endblock %}
+  </body>
+</html>
