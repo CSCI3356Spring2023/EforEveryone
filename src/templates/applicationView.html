@@ -58,6 +58,14 @@
           <br>
           Relevant experience - {{application.experience}}
         </div>
+        {% if application.pendingInstructorAccept %}
+          <a class="button" href="{% url 'accept_application' application.id %}" id="accept-button">Accept</a>
+          <a class="button" href="{% url 'reject_application' application.id %}" id="reject-button">Reject</a>
+        {% elif not application.pendingInstructorAccept and not application.acceptedByStudent %}
+           <button class = "status-button" id = "closed-button">Accepted - Pending Student Response</button>
+        {% else %}
+           <button class = "status-button" id = "closed-button">Accepted and Confirmed</button>
+        {% endif %}
       </div>
       {% endfor %}
     <br>

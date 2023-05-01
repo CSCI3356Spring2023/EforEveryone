@@ -76,7 +76,8 @@ def studentHome_view(request, *args, **kwargs):
         appliedCourses.append(application.course)
     context = {
         "all_courses" : courseDataAll,
-        "applied_courses" : appliedCourses
+        "applied_courses" : appliedCourses,
+        "applications" : applications
     }
     return render(request, "studentHome.html", context)
 

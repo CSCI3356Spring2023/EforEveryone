@@ -234,11 +234,13 @@
                 Interest - {{application.interest}}
                 <br>
                 Relevant experience - {{application.experience}}
-                {% if application.status%}
+                {% if application.pendingInstructorAccept %}
                 <a class="button" href="{% url 'accept_application' application.id %}" id="accept-button">Accept</a>
-                <button class="reject-button">Reject</button>
+                <a class="button" href="{% url 'reject_application' application.id %}" id="reject-button">Reject</a>
+                {% elif not application.pendingInstructorAccept and not application.acceptedByStudent %}
+                <button class = "status-button" id = "closed-button">Accepted - Pending Student Response</button>
                 {% else %}
-                <button class = "status-button" id = "closed-button">Accepted</button>
+                <button class = "status-button" id = "closed-button">Accepted and Confirmed</button>
                 {% endif %}
                 
               </div>

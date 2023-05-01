@@ -74,15 +74,63 @@ def accept_application(request, application_id):
         fail_silently=False,
     )
 
-    # Mark the application as accepted in the database, update the course status if needed
-    course.numberOfAcceptedTAs += 1
-    if course.numberOfAcceptedTAs == course.numberOfTAs:
-        course.status = False
-    
-    course.save()
-
-    application.status = False
+    # Mark the application as accepted by instructor in the database
+    application.pendingInstructorAccept = False
     application.save()
 
     # Redirect to the application list page
     return redirect('instructorHome')
+
+def reject_application(request, application_id):
+    # Get the application object from the database
+    application = get_object_or_404(Application, id=application_id)
+
+    # Send an email to the student associated with the application
+    send_mail(
+        'You application was not accepted',
+        'Unfortunately, your application for {} has not been accepted.'.format(application.course),
+        'from@example.com',
+        [application.email],
+        fail_silently=False,
+    )
+
+    # Remove the applications
+    application.delete()
+
+    # Redirect to the application list page
+    return redirect('instructorHome')
+
+def student_accept_application(request, application_id):
+    # Get the application object from the database
+    application = get_object_or_404(Application, id=application_id)
+    course = Course.objects.get(courseName = application.course.courseName)
+    profile = get_object_or_404(Profile, user=request.user)
+
+    # Send an email to the student associated with the application
+    send_mail(
+        'You have accepted to be a TA',
+        'Congratulations! Your application for {} has been accepted.'.format(application.course),
+        'from@example.com',
+        [application.email],
+        fail_silently=False,
+    )
+
+    # Mark the application as accepted in the database, update the course status if needed
+    course.numberOfAcceptedTAs += 1
+    if course.numberOfAcceptedTAs == course.numberOfTAs:
+        course.status = False
+    course.save()
+
+    application.acceptedByStudent = True
+    application.save()
+
+    profile.usedApplications = 5
+    profile.save()
+
+    for application in Application.objects.filter(applicantUser = request.user):
+        if application.id != application_id:
+            application.delete()
+            
+    # Redirect to the application list page
+    return redirect('studentHome')
+

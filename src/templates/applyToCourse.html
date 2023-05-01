@@ -35,7 +35,8 @@
     <div class = "header-box">
       <div class = "row" id = "top-bar">
         <div class = "header"> TA Application </div> 
-        <button class = "button" id = "profile-button" value = "-1">My Profile</button>
+        {% url 'profile_view_s' request.user.username as profile_url %}
+        <a class = "button" id = "profile-button" href="{{profile_url}}">My Profile</a>
         <a class="button" id = "home-button" href="/studentHome">Back To Home</a>
       </div>
     </div>
