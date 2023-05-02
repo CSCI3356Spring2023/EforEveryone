@@ -145,3 +145,28 @@ def student_accept_application(request, application_id):
     # Redirect to the application list page
     return redirect('studentHome')
 
+def student_reject_application(request, application_id):
+    # Get the application object from the database
+    application = get_object_or_404(Application, id=application_id)
+    course = Course.objects.get(courseName = application.course.courseName)
+    profile = get_object_or_404(Profile, user=request.user)
+
+    # Send an email to the student associated with the application
+    send_mail(
+        'You have rejected to be a TA',
+        'Your application for {} has been deleted.'.format(application.course),
+        'from@example.com',
+        [application.email],
+        fail_silently=False,
+    )
+
+    application.acceptedByStudent = True
+    application.save()
+
+    profile.usedApplications -= 1
+    profile.save()
+
+    application.delete()
+            
+    # Redirect to the application list page
+    return redirect('studentHome')

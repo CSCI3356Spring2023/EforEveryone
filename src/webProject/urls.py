@@ -19,7 +19,7 @@ from django.urls import include, path
 #Custom urls
 from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, send_email
 from course.views import Course_Creation_View, Course_Edit_View, Course_Delete_View, Course_Edit_View_Admin, Course_Delete_View_Admin
-from application.views import Application_Creation_View, Application_View, accept_application, reject_application, student_accept_application, Admin_Application_View
+from application.views import Application_Creation_View, Application_View, accept_application, reject_application, student_accept_application, Admin_Application_View, student_reject_application
 from pages.views import profile_view
 
 urlpatterns = [
@@ -47,6 +47,7 @@ urlpatterns = [
     path('accept/<int:application_id>/', accept_application, name="accept_application"),
     path('reject/<int:application_id>/', reject_application, name="reject_application"),
     path('studentAccept/<int:application_id>/', student_accept_application, name="student_accept_application"),
+    path('studentReject/<int:application_id>/', student_reject_application, name="student_reject_application"),
 ]
 
 # urlpatterns += [

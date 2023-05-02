@@ -156,6 +156,7 @@
                     {% for application in applications %}
                       {% if application.course == course and not application.acceptedByStudent and not application.pendingInstructorAccept %}
                         <a class="button" href="{% url 'student_accept_application' application.id %}" id="accept-button">Accept Position</a>
+                        <a class="button" href="{% url 'student_reject_application' application.id %}" id="accept-button">Reject Position</a>
                       {% elif application.course == course and application.acceptedByStudent%}
                         <button class = "status-button" id = "app-status">Accepted</button>
                       {% else %}
