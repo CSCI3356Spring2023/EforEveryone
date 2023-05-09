@@ -25,6 +25,15 @@ class Course(models.Model):
     numberOfAcceptedTAs = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     instructorUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = True, blank=True, null=True)
+    
+    def spots_filled(self):
+        return "%s / %s"%(self.numberOfAcceptedTAs, self.numberOfTAs)
+    
+    def status(self):
+        if (self.numberOfAcceptedTAs == self.numberOfTAs):
+            return "CLOSED"
+        else:
+            return "OPEN"
 
     def __str__(self):
         return str(self.courseNumber) + "/" + str(self.courseSection) + " " + self.courseName
