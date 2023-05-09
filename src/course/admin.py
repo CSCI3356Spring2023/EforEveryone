@@ -11,6 +11,7 @@ class DiscussionInline(admin.StackedInline):
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [DiscussionInline]
+    list_display = ['__str__', 'spots_filled', 'status']
 
 class ProfileInLine(admin.StackedInline):
     model = Profile
