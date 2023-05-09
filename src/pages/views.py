@@ -74,12 +74,31 @@ def studentHome_view(request, *args, **kwargs):
     appliedCourses=[]
     for application in applications:
         appliedCourses.append(application.course)
-    context = {
-        "all_courses" : courseDataAll,
+
+    closedCourses = 0
+    courses = Course.objects.all()
+    courseCount = Course.objects.all().count()
+
+    for c in courses:
+        if (c.numberOfAcceptedTAs == c.numberOfTAs):
+            closedCourses += 1
+    if (closedCourses == courseCount):
+        return redirect('/system-closed')
+    else:
+        context = {
+            "all_courses" : courseDataAll,
         "applied_courses" : appliedCourses,
-        "applications" : applications
-    }
-    return render(request, "studentHome.html", context)
+            "applications" : applications
+        }
+        return render(request, "studentHome.html", context)
+
+
+# def system_closed(request):
+#     return redirect("systemClosed.html")
+@login_required(login_url='/logIn')
+def systemClosed(request, *args, **kwargs):
+    return render(request, "systemClosed.html", {})
+
 
 @login_required(login_url='/logIn')
 def adminHome_view(request, *args, **kwargs):

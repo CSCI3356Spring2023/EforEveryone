@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 #Custom urls
-from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, send_email
+from pages.views import adminHome_view, studentHome_view, instructorHome_view, logIn_view, logOut_view, instructorAddCourse, send_email, systemClosed
 from course.views import Course_Creation_View, Course_Edit_View, Course_Delete_View, Course_Edit_View_Admin, Course_Delete_View_Admin
 from application.views import Application_Creation_View, Application_View, accept_application, reject_application, student_accept_application, Admin_Application_View, student_reject_application
 from pages.views import profile_view
@@ -42,6 +42,8 @@ urlpatterns = [
     path('logIn/', logIn_view),
     path('logOut/', logOut_view),
     path('send_email/', send_email, name='send_email'),
+    # path('systemClosed/', system_closed, name='system_closed'),
+    path('system-closed/', systemClosed),
     path('studentHome/profile/<str:username>/', profile_view, name='profile_view_s'),
     path('adminHome/profile/<str:username>/', profile_view, name='profile_view_a'),
     path('accept/<int:application_id>/', accept_application, name="accept_application"),
