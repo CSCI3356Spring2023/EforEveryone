@@ -65,6 +65,9 @@ def instructorHome_view(request, *args, **kwargs):
     }
     return render(request, "instructorHome.html", context)
 
+@login_required(login_url='/logIn')
+def cant_hire_page(request):
+    return render(request,"cant_hire.html")
 
 
 @login_required(login_url='/logIn')
