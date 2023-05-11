@@ -116,6 +116,8 @@ def student_accept_application(request, application_id):
     application = get_object_or_404(Application, id=application_id)
     course = Course.objects.get(courseName = application.course.courseName)
     profile = get_object_or_404(Profile, user=request.user)
+    profile.hired = True
+    profile.save()
 
     # Send an email to the student associated with the application
     send_mail(

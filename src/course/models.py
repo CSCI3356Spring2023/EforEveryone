@@ -59,6 +59,7 @@ class DiscussionFormSet(BaseModelFormSet):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     usedApplications = models.PositiveIntegerField(default=0, blank=False, null=False)
+    hired = models.BooleanField(default=False)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
