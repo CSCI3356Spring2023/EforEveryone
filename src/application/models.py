@@ -16,6 +16,7 @@ class Application(models.Model):
     applicantUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = True, blank=True, null=True)
     pendingInstructorAccept = models.BooleanField(default=True)
     acceptedByStudent = models.BooleanField(default=False)
+    rejectedByStudent = models.BooleanField(default=False)
     COHORT_CHOICES = [
         ('Freshman', 'Freshman'),
         ('Sophomore', 'Sophomore'),

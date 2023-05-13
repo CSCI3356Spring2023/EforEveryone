@@ -154,14 +154,17 @@
               <div class = "row">
                 <h3><strong>CSCI {{ course.courseNumber}} {{ course.courseName }}</strong></h3>
                     {% for application in applications %}
-                      {% if application.course == course and not application.acceptedByStudent and not application.pendingInstructorAccept %}
+
+                      {% if application.rejectedByStudent %}
+                      <button class = "status-button" id = "app-status" style="background-color: #EE4B2B;">Offer Declined</button>
+                      {% elif application.course == course and not application.acceptedByStudent and not application.pendingInstructorAccept %}
                         <a class="button" href="{% url 'student_accept_application' application.id %}" id="accept-button">Accept Position</a>
                         <a class="button" href="{% url 'student_reject_application' application.id %}" id="accept-button">Reject Position</a>
                       {% elif application.course == course and application.acceptedByStudent%}
-                        <button class = "status-button" id = "app-status">Accepted</button>
+                        <button class = "status-button" id = "app-status" style="background-color: green;">Accepted</button>
                       {% else %}
-                       <button class = "status-button" id = "app-status">Awaiting Review</button>
-                      {% endif %}
+                       <button class = "status-button" id = "app-status" style="background-color: #FFD966;">Awaiting Review</button>
+                      {% endif %} 
                     {% endfor %}
               </div>
               <h4>{{ course.instructor }}</h4>

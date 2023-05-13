@@ -225,6 +225,27 @@ button {
   padding:4px;
 }
 
+.green-button {
+  background-color: green;
+  border: 0px;
+  margin-left: 20px;
+  padding:4px;
+}
+
+.yellow-button {
+  background-color: #FFD966;
+  border: 0px;
+  margin-left: 20px;
+  padding:4px;
+}
+
+.red-button {
+  background-color: #EE4B2B;
+  border: 0px;
+  margin-left: 20px;
+  padding:4px;
+}
+
 #app-status {
   background-color: #FFD966;
   color: black;

@@ -185,13 +185,22 @@ def student_reject_application(request, application_id):
         fail_silently=False,
     )
 
-    application.acceptedByStudent = True
+    #MK
+    send_mail(
+        'Your TA offer has been rejected',
+        '{} {} has rejected the invitation to be a TA for {}.'.format(application.applicantUser.first_name, application.applicantUser.last_name, application.course.courseName),
+        'from@example.com',
+        [application.course.instructorUser.email],
+        fail_silently=False,
+    )
+
+    application.rejectedByStudent = True
     application.save()
 
     profile.usedApplications -= 1
     profile.save()
 
-    application.delete()
+    #application.delete()
             
     # Redirect to the application list page
     return redirect('studentHome')
