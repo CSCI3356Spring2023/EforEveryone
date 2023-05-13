@@ -95,7 +95,13 @@ def Course_Delete_View_Admin(request, courseID):
 
     return render(request, "adminEditCourseForm.html", context)  
             
-
+def Course_System_Update(request):
+    courseDataAll = Course.objects.all().order_by('-created_at')
+    for course in courseDataAll:
+        course.systemStatus = not course.systemStatus
+        course.save()
+    
+    return redirect('/adminHome')
 
 # def Course_Creation_View(request):
 #     print(request.method)

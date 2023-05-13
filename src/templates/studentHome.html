@@ -128,7 +128,7 @@
               <div class = "row" id = "info">
                 Discussion Section: {{course.hasDiscussion|yesno:"Yes,No" }} &nbsp &nbsp &nbsp Number of TAs: {{course.numberOfTAs}} &nbsp &nbsp &nbsp Grading Meetings: {{course.homeworkGradedInMeetings|yesno:"Yes,No"}} &nbsp &nbsp &nbsp Number of Office Hours per Week: {{course.officeHoursPerWeek}}
                 {% url 'studentApply' course.id as the_url %}
-                {% if the_url and course not in applied_courses%}
+                {% if the_url and course not in applied_courses and course.systemStatus%}
                 <a class="button" id = "apply-button" href="{{ the_url}}">Apply</a>
                 {% endif %}
               </div>

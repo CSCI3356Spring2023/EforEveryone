@@ -25,6 +25,7 @@ class Course(models.Model):
     numberOfAcceptedTAs = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     instructorUser = models.ForeignKey(User, on_delete=models.CASCADE, editable = True, blank=True, null=True)
+    systemStatus = models.BooleanField(default=True)
     
     def spots_filled(self):
         return "%s / %s"%(self.numberOfAcceptedTAs, self.numberOfTAs)
