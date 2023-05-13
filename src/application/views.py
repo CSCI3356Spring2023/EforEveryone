@@ -124,6 +124,7 @@ def student_accept_application(request, application_id):
     profile = get_object_or_404(Profile, user=request.user)
     profile.hired = True
     profile.save()
+    course_info = application.course
 
     # Send an email to the student associated with the application
     send_mail(
@@ -138,6 +139,7 @@ def student_accept_application(request, application_id):
     course.numberOfAcceptedTAs += 1
     if course.numberOfAcceptedTAs == course.numberOfTAs:
         course.status = False
+        
     course.save()
 
     application.acceptedByStudent = True
@@ -149,6 +151,21 @@ def student_accept_application(request, application_id):
     for application in Application.objects.filter(applicantUser = request.user):
         if application.id != application_id:
             application.delete()
+
+    #email students not accepted now that all positions are filled
+    if course.numberOfAcceptedTAs == course.numberOfTAs:
+        for application in Application.objects.filter(course = course_info):
+            if application.pendingInstructorAccept:
+                send_mail(
+                    'You have not been choosen to be a TA',
+                    'All TAs for {} have been selected already.'.format(application.course),
+                    'from@example.com',
+                    [application.email],
+                    fail_silently=False,
+                )
+                current_profile = get_object_or_404(Profile, user=application.applicantUser)
+                current_profile.usedApplications -= 1
+                application.delete()
             
     # Redirect to the application list page
     return redirect('studentHome')
