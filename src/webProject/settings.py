@@ -63,6 +63,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'webProject.urls'
 
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-d6bc.up.railway.app'
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
