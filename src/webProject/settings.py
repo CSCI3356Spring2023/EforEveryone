@@ -65,7 +65,7 @@ ROOT_URLCONF = 'webProject.urls'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-d6bc.up.railway.app'
+    'https://eforeveryone-production.up.railway.app'
 ]
 
 TEMPLATES = [
