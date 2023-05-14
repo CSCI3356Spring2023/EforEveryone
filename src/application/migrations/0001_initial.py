@@ -10,85 +10,30 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("course", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('course', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Application",
+            name='Application',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("created_at", models.DateTimeField(auto_now_add=True)),
-                ("updated_at", models.DateTimeField(auto_now=True)),
-                ("name", models.CharField(blank=True, default="Name", max_length=100)),
-                (
-                    "email",
-                    models.CharField(blank=True, default="Email", max_length=100),
-                ),
-                ("eagleID", models.IntegerField(default=0)),
-                ("courseHistory", models.TextField(blank=True, null=True)),
-                ("interest", models.TextField(blank=True, null=True)),
-                ("experience", models.TextField(blank=True, null=True)),
-                ("pendingInstructorAccept", models.BooleanField(default=True)),
-                ("acceptedByStudent", models.BooleanField(default=False)),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('name', models.CharField(blank=True, default='Name', max_length=100)),
+                ('email', models.CharField(blank=True, default='Email', max_length=100)),
+                ('eagleID', models.IntegerField(default=0)),
+                ('courseHistory', models.TextField(blank=True, null=True)),
+                ('interest', models.TextField(blank=True, null=True)),
+                ('experience', models.TextField(blank=True, null=True)),
+                ('pendingInstructorAccept', models.BooleanField(default=True)),
+                ('acceptedByStudent', models.BooleanField(default=False)),
                 ('cohort', models.CharField(blank=True, choices=[('Freshman', 'Freshman'), ('Sophomore', 'Sophomore'), ('Junior', 'Junior'), ('Senior', 'Senior')], max_length=20, null=True)),
                 ('relation', models.CharField(blank=True, choices=[('Major BS', 'Major BS'), ('Major BA', 'Major BA'), ('Minor', 'Minor'), ('Other', 'Other')], max_length=20, null=True)),
-                ("rejectedByStudent", models.BooleanField(default=False)),
-                (
-                    "cohort",
-                    models.CharField(
-                        blank=True,
-                        choices=[
-                            ("Freshman", "Freshman"),
-                            ("Sophomore", "Sophomore"),
-                            ("Junior", "Junior"),
-                            ("Senior", "Senior"),
-                        ],
-                        max_length=20,
-                        null=True,
-                    ),
-                ),
-                (
-                    "relation",
-                    models.CharField(
-                        blank=True,
-                        choices=[
-                            ("Major BS", "Major BS"),
-                            ("Major BA", "Major BA"),
-                            ("Minor", "Minor"),
-                            ("Other", "Other"),
-                        ],
-                        max_length=20,
-                        null=True,
-                    ),
-                ),
-                (
-                    "applicantUser",
-                    models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to=settings.AUTH_USER_MODEL,
-                    ),
-                ),
-                (
-                    "course",
-                    models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="course.course",
-                    ),
-                ),
+                ('applicantUser', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='course.course')),
             ],
         ),
     ]
+

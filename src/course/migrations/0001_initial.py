@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Course",
+            name='Course',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
@@ -34,40 +34,28 @@ class Migration(migrations.Migration):
                 ('relevantInfo', models.TextField(blank=True, null=True)),
                 ('numberOfTAs', models.IntegerField(default=0)),
                 ('numberOfAcceptedTAs', models.IntegerField(default=0)),
-                ('status', models.BooleanField(default=True)),
+                ('systemStatus', models.BooleanField(default=True)),
                 ('instructorUser', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name="Profile",
+            name='Profile',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('usedApplications', models.PositiveIntegerField(default=0)),
+                ('hired', models.BooleanField(default=False)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name="Discussion",
+            name='Discussion',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("discussionNumber", models.IntegerField(default=0)),
-                ("days", models.CharField(default="", max_length=100)),
-                ("startTime", models.TimeField(default="00:00:00")),
-                ("endTime", models.TimeField(default="00:00:00")),
-                (
-                    "course",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="course.course"
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('discussionNumber', models.IntegerField(default=0)),
+                ('days', models.CharField(default='', max_length=100)),
+                ('startTime', models.TimeField(default='00:00:00')),
+                ('endTime', models.TimeField(default='00:00:00')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='course.course')),
             ],
         ),
     ]
