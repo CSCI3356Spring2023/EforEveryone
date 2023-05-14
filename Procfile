@@ -1,0 +1,1 @@
+web: cd ./webProject && python manage.py migrate && gunicorn webProject.wsgi
